@@ -1,9 +1,13 @@
 import React, { PropTypes } from 'react';
-// import { List } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 
 function Filter() {
   return (
-    <div>Filter displayed posts</div>
+    <Button.Group widths="3">
+      <Button toggle>ALL</Button>
+      <Button toggle>PUBLIC</Button>
+      <Button toggle>PRIVATE</Button>
+    </Button.Group>
   );
 }
 

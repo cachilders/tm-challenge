@@ -1,9 +1,14 @@
 import React, { PropTypes } from 'react';
-// import { List } from 'semantic-ui-react';
+import { Form, Button } from 'semantic-ui-react';
 
 function Compose() {
   return (
-    <div>Compose a post</div>
+    <Form>
+      <Form.Group inline>
+        <Form.TextArea name="post" placeholder="Say something..." rows="3" width={12} />
+        <Button type="submit" size="massive">POST</Button>
+      </Form.Group>
+    </Form>
   );
 }
 

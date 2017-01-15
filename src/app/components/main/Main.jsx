@@ -11,7 +11,7 @@ function Main(props) {
       <Grid celled>
         <Grid.Row columns={1}>
           <Grid.Column width={16}>
-            <Header>Notify</Header>
+            <Header as="h1">Notify</Header>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row columns={2}>
