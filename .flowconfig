@@ -1,0 +1,10 @@
+[ignore]
+*.test.js
+node_modules
+dist
+
+[include]
+
+[libs]
+
+[options]
