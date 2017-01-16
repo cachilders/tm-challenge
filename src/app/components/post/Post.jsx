@@ -12,14 +12,16 @@ function Post() {
         <Comment.Author as="a">Author McAuthorton</Comment.Author>
         <Comment.Metadata>
           <span>Posted 10 Minutes Ago</span>
-          <Icon name="reply" size="large" />
-          <Icon name="repeat" size="large" />
+          <Comment.Actions>
+            <Icon name="reply" size="large" />
+            <Icon name="repeat" size="large" />
+          </Comment.Actions>
         </Comment.Metadata>
       </Comment.Content>
     </Comment>
   );
 }
 
-Post.PropTypes = {};
+Post.propTypes = {};
 
 export default Post;

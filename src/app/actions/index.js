@@ -1,18 +1,37 @@
-import axios from 'axios'; // You know, for XHR
+import axios from 'axios';
 
-export const SAMPLE_ACTION = 'SAMPLE_ACTION';
+export const LOAD_SLIDES = 'LOAD_SLIDES';
+export const CHANGE_SLIDE = 'CHANGE_SLIDE';
 
-function sampleAction(value) {
+function loadSlides(slides) {
   return {
-    type: SAMPLE_ACTION,
-    value,
+    type: LOAD_SLIDES,
+    slides,
   };
 }
 
-export function sampleExport() {
+function changeSlide(index) {
+  return {
+    type: CHANGE_SLIDE,
+    index,
+  };
+}
+
+function fetchSlides() {
+  return (dispatch) => {
+    axios.get('/json?filename=slideshow')
+    .then(res => res.data)
+    .then(slides => dispatch(loadSlides(slides)));
+  };
+}
+
+export function loadInitialState() {
+  return dispatch => dispatch(fetchSlides());
+}
+
+export function navigateSlideshow(step) {
   return (dispatch, getState) => {
-    if (getState() !== { someValue: 'shrg' }) {
-      return dispatch(sampleAction({ someValue: 'shrg' }));
-    }
+    const index = getState().notify.slidesIndex + step;
+    dispatch(changeSlide(index));
   };
 }

@@ -12,6 +12,6 @@ function Timeline() {
   );
 }
 
-Timeline.PropTypes = {};
+Timeline.propTypes = {};
 
 export default Timeline;

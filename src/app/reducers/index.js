@@ -1,21 +1,33 @@
 import { combineReducers } from 'redux';
-import { SAMPLE_ACTION } from '../actions/index';
+import {
+  LOAD_SLIDES,
+  CHANGE_SLIDE } from '../actions/index';
 
 const initialState = {
-  someValue: 'yup',
+  slides: [],
+  slidesLoading: true,
+  slidesIndex: null,
 };
 
-function shrg(state = initialState, action) {
+function notify(state = initialState, action) {
   switch (action.type) {
-    case SAMPLE_ACTION:
-      return Object.assign({}, state, action.value);
+    case LOAD_SLIDES:
+      return Object.assign({}, state, {
+        slides: action.slides,
+        slidesLoading: false,
+        slidesIndex: 0,
+      });
+    case CHANGE_SLIDE:
+      return Object.assign({}, state, {
+        slidesIndex: action.index,
+      });
     default:
       return state;
   }
 }
 
 const rootReducer = combineReducers({
-  shrg,
+  notify,
 });
 
 export default rootReducer;

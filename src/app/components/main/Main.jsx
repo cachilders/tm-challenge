@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Container, Grid, Header } from 'semantic-ui-react';
 import Compose from '../compose/Compose';
 import Filter from '../filter/Filter';
@@ -32,7 +32,5 @@ function Main(props) {
     </Container>
   );
 }
-
-Main.PropTypes = {};
 
 export default Main;

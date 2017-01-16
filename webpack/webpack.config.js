@@ -97,11 +97,11 @@ module.exports = (options) => {
     };
   } else {
     webpackConfig.plugins.push(
-      new UglifyJsPlugin({
-        compress: {
-          warnings: true,
-        },
-      })
+      // new UglifyJsPlugin({
+      //   compress: {
+      //     warnings: true,
+      //   },
+      // })
     );
     webpackConfig.entry.vendor = [
       'axios',

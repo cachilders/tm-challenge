@@ -12,6 +12,6 @@ function Compose() {
   );
 }
 
-Compose.PropTypes = {};
+Compose.propTypes = {};
 
 export default Compose;

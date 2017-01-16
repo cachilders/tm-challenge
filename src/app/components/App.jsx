@@ -1,12 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Container } from 'semantic-ui-react';
-import { sampleExport } from '../actions/index';
+import {
+  loadInitialState,
+  navigateSlideshow } from '../actions/index';
 
 class App extends Component {
   componentWillMount() {
-    const { dispatch } = this.props;
-    dispatch(sampleExport());
+    this.props.loadInitialState();
   }
 
   render() {
@@ -18,17 +19,28 @@ class App extends Component {
   }
 }
 
-App.PropTypes = {
-  children: PropTypes.object,
-  someValue: PropTypes.string,
-  dispatch: PropTypes.function,
-};
-
 function mapStateToProps(state) {
-  const { someValue } = state.shrg;
+  const {
+    slides,
+    slidesLoading,
+    slidesIndex } = state.notify;
   return {
-    someValue,
+    slides,
+    slidesLoading,
+    slidesIndex,
   };
 }
 
-export default connect(mapStateToProps)(App);
+function mapDispatchToProps(dispatch) {
+  return {
+    loadInitialState: () => dispatch(loadInitialState()),
+    navigateSlideshow: step => dispatch(navigateSlideshow(step)),
+  };
+}
+
+App.propTypes = {
+  children: PropTypes.shape.isRequired,
+  loadInitialState: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

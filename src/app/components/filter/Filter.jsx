@@ -11,6 +11,6 @@ function Filter() {
   );
 }
 
-Filter.PropTypes = {};
+Filter.propTypes = {};
 
 export default Filter;
