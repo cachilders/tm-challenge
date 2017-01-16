@@ -16,4 +16,6 @@ app.use('/', express.static(`${__dirname}/dist/`));
 app.use('/avi', express.static(`${__dirname}/static/images/avatars`));
 app.use('/json', json);
 
-app.listen(3000, console.log('Connected on 3k'));
+const port = process.env.PORT || 3000;
+
+app.listen(3000, console.log(`Connected on ${port}`));
