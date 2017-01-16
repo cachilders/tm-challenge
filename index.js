@@ -18,4 +18,4 @@ app.use('/json', json);
 
 const port = process.env.PORT || 3000;
 
-app.listen(3000, console.log(`Connected on ${port}`));
+app.listen(port, console.log(`Connected on ${port}`));
