@@ -1,12 +1,14 @@
 import React, { PropTypes } from 'react';
 import moment from 'moment';
-import { Comment, Icon, Label } from 'semantic-ui-react';
+import { Comment, Icon } from 'semantic-ui-react';
 
-function Post({ avatar, username, postBody, timestamp, privacy }) {
+function Post({ avatar, username, postBody, timestamp, privacy, handleText }) {
   const timeSince = moment(timestamp).fromNow();
+  const reply = `reply:@${username} `;
+  const renotify = `renotify:${postBody.slice(0, 131)}`;
   return (
     <Comment>
-      <Comment.Avatar as="a" src={avatar} />
+      <Comment.Avatar src={avatar} />
       <Comment.Content>
         <Comment.Text>
           {postBody}
@@ -17,14 +19,18 @@ function Post({ avatar, username, postBody, timestamp, privacy }) {
           :
             null
         }
-        <Comment.Author as="a">{username}</Comment.Author>
         <Comment.Metadata>
+          <Comment.Author>{username}</Comment.Author>
           <span>{ timeSince }</span>
-          <Comment.Actions>
-            <Icon name="reply" size="large" />
-            <Icon name="repeat" size="large" />
-          </Comment.Actions>
         </Comment.Metadata>
+        <Comment.Actions>
+          <Comment.Action>
+            <Icon name="reply" onClick={() => handleText(reply)} />
+          </Comment.Action>
+          <Comment.Action>
+            <Icon name="repeat" onClick={() => handleText(renotify)} />
+          </Comment.Action>
+        </Comment.Actions>
       </Comment.Content>
     </Comment>
   );
@@ -36,6 +42,7 @@ Post.propTypes = {
   postBody: PropTypes.string.isRequired,
   timestamp: PropTypes.string.isRequired,
   privacy: PropTypes.string.isRequired,
+  handleText: PropTypes.func.isRequired,
 };
 
 export default Post;

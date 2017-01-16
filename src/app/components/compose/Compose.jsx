@@ -6,7 +6,7 @@ function Compose({ postBody, handleText, publish }) {
     <Form>
       <Form.Group inline>
         {
-          postBody.length !== 140 ?
+          postBody.length <= 140 ?
             <Form.TextArea
               name="post"
               value={postBody}
@@ -18,7 +18,7 @@ function Compose({ postBody, handleText, publish }) {
             <Form.TextArea
               name="post"
               value={postBody}
-              onChange={e => handleText(e)}
+              onChange={e => handleText(e.target.value)}
               placeholder="Say something..."
               rows="3" width={12}
               error

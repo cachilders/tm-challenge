@@ -87,26 +87,24 @@ export function loadInitialState() {
 }
 
 export function handleText(text) {
-  return (dispatch) => {
-    if (text.length <= 140) {
-      return dispatch(updateText(text));
-    }
-  };
+  return dispatch => dispatch(updateText(text));
 }
 
 export function publish(e) {
   e.preventDefault();
   return (dispatch, getState) => {
     const state = getState().notify;
-    const post = {
-      username: state.username,
-      avatar: state.avatar,
-      postBody: state.postBody,
-      timestamp: new Date(),
-      privacy: state.activeFilter === 'private' ? 'private' : 'public',
-      postId: state.nextPost,
-    };
-    dispatch(newPost(post));
+    if (state.postBody.length <= 140) {
+      const post = {
+        username: state.username,
+        avatar: state.avatar,
+        postBody: state.postBody,
+        timestamp: new Date(),
+        privacy: state.activeFilter === 'private' ? 'private' : 'public',
+        postId: state.nextPost,
+      };
+      dispatch(newPost(post));
+    }
   };
 }
 

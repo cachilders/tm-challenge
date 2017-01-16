@@ -12,7 +12,7 @@ const initialState = {
   posts: [],
   filteredPosts: [],
   slides: [],
-  username: 'User Userton',
+  username: 'userUserton',
   avatar: 'avi/Cole.png',
   postBody: '',
   nextPost: 1,

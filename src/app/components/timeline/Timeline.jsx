@@ -2,7 +2,10 @@ import React, { PropTypes } from 'react';
 import { Comment, Segment } from 'semantic-ui-react';
 import Post from '../post/Post';
 
-function Timeline({ filteredPosts, postsLoading }) {
+const click = {};
+
+function Timeline({ filteredPosts, postsLoading, handleText }) {
+  click.handleText = handleText;
   return (
     <div>
       {
@@ -10,8 +13,8 @@ function Timeline({ filteredPosts, postsLoading }) {
           <Segment loading basic padded="very" />
         :
           <Segment basic>
-            <Comment.Group>
-              { filteredPosts.map(post => <Post key={post.id} {...post} />) }
+            <Comment.Group minimal>
+              { filteredPosts.map(post => <Post key={post.id} {...Object.assign(click, post)} />) }
             </Comment.Group>
           </Segment>
       }
@@ -22,6 +25,7 @@ function Timeline({ filteredPosts, postsLoading }) {
 Timeline.propTypes = {
   filteredPosts: PropTypes.arrayOf.isRequired,
   postsLoading: PropTypes.bool.isRequired,
+  handleText: PropTypes.func.isRequired,
 };
 
 export default Timeline;
