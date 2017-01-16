@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { Container } from 'semantic-ui-react';
 import {
   loadInitialState,
-  navigateSlideshow } from '../actions/index';
+  navigateSlideshow,
+  handleText,
+  publish } from '../actions/index';
 
 class App extends Component {
   componentWillMount() {
@@ -21,10 +23,20 @@ class App extends Component {
 
 function mapStateToProps(state) {
   const {
+    posts,
+    filteredPosts,
+    username,
+    postBody,
+    activeFilter,
     slides,
     slidesLoading,
     slidesIndex } = state.notify;
   return {
+    posts,
+    filteredPosts,
+    username,
+    postBody,
+    activeFilter,
     slides,
     slidesLoading,
     slidesIndex,
@@ -35,6 +47,8 @@ function mapDispatchToProps(dispatch) {
   return {
     loadInitialState: () => dispatch(loadInitialState()),
     navigateSlideshow: step => dispatch(navigateSlideshow(step)),
+    handleText: e => dispatch(handleText(e.target.value)),
+    publish: e => dispatch(publish(e)),
   };
 }
 
