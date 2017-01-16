@@ -12,7 +12,7 @@ function Post({ avatar, username, postBody, timestamp, privacy }) {
           {postBody}
         </Comment.Text>
         {
-          privacy === 'public' ?
+          privacy !== 'public' ?
             <Icon color="red" name="eye" />
           :
             null

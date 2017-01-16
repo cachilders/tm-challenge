@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Comment, Segment } from 'semantic-ui-react';
 import Post from '../post/Post';
 
-function Timeline({ posts, postsLoading }) {
+function Timeline({ filteredPosts, postsLoading }) {
   return (
     <div>
       {
@@ -11,7 +11,7 @@ function Timeline({ posts, postsLoading }) {
         :
           <Segment basic>
             <Comment.Group>
-              { posts.map(post => <Post key={post.id} {...post} />) }
+              { filteredPosts.map(post => <Post key={post.id} {...post} />) }
             </Comment.Group>
           </Segment>
       }
@@ -20,7 +20,7 @@ function Timeline({ posts, postsLoading }) {
 }
 
 Timeline.propTypes = {
-  posts: PropTypes.arrayOf.isRequired,
+  filteredPosts: PropTypes.arrayOf.isRequired,
   postsLoading: PropTypes.bool.isRequired,
 };
 

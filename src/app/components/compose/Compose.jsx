@@ -10,7 +10,7 @@ function Compose({ postBody, handleText, publish }) {
             <Form.TextArea
               name="post"
               value={postBody}
-              onChange={e => handleText(e)}
+              onChange={e => handleText(e.target.value)}
               placeholder="Say something..."
               rows="3" width={12}
             />

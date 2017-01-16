@@ -4,7 +4,9 @@ import {
   LOAD_SLIDES,
   CHANGE_SLIDE,
   UPDATE_TEXT,
-  NEW_POST } from '../actions/index';
+  NEW_POST,
+  UPDATE_FILTER,
+  FILTER_POSTS } from '../actions/index';
 
 const initialState = {
   posts: [],
@@ -25,7 +27,16 @@ function notify(state = initialState, action) {
     case LOAD_POSTS:
       return Object.assign({}, state, {
         posts: [...action.posts],
+      });
+    case FILTER_POSTS:
+      return Object.assign({}, state, {
+        filteredPosts: [...action.filteredPosts],
         postsLoading: false,
+      });
+    case UPDATE_FILTER:
+      return Object.assign({}, state, {
+        activeFilter: action.activeFilter,
+        postsLoading: true,
       });
     case UPDATE_TEXT:
       return Object.assign({}, state, {
@@ -34,6 +45,7 @@ function notify(state = initialState, action) {
     case NEW_POST:
       return Object.assign({}, state, {
         posts: [action.post, ...state.posts],
+        filteredPosts: [action.post, ...state.filteredPosts],
         nextPost: state.nextPost + 1,
         postBody: '',
       });

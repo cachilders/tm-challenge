@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Container } from 'semantic-ui-react';
 import {
   loadInitialState,
+  filterPosts,
   navigateSlideshow,
   handleText,
   publish } from '../actions/index';
@@ -23,7 +24,6 @@ class App extends Component {
 
 function mapStateToProps(state) {
   const {
-    posts,
     postsLoading,
     filteredPosts,
     username,
@@ -33,7 +33,6 @@ function mapStateToProps(state) {
     slidesLoading,
     slidesIndex } = state.notify;
   return {
-    posts,
     postsLoading,
     filteredPosts,
     username,
@@ -48,8 +47,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     loadInitialState: () => dispatch(loadInitialState()),
+    filterPosts: newFilter => dispatch(filterPosts(newFilter)),
     navigateSlideshow: step => dispatch(navigateSlideshow(step)),
-    handleText: e => dispatch(handleText(e.target.value)),
+    handleText: text => dispatch(handleText(text)),
     publish: e => dispatch(publish(e)),
   };
 }
@@ -57,6 +57,7 @@ function mapDispatchToProps(dispatch) {
 App.propTypes = {
   children: PropTypes.shape.isRequired,
   loadInitialState: PropTypes.func.isRequired,
+  filterPosts: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
