@@ -24,6 +24,7 @@ class App extends Component {
 function mapStateToProps(state) {
   const {
     posts,
+    postsLoading,
     filteredPosts,
     username,
     postBody,
@@ -33,6 +34,7 @@ function mapStateToProps(state) {
     slidesIndex } = state.notify;
   return {
     posts,
+    postsLoading,
     filteredPosts,
     username,
     postBody,

@@ -1,17 +1,25 @@
 import React, { PropTypes } from 'react';
-import { Comment, Icon } from 'semantic-ui-react';
+import moment from 'moment';
+import { Comment, Icon, Label } from 'semantic-ui-react';
 
-function Post() {
+function Post({ avatar, username, postBody, timestamp, privacy }) {
+  const timeSince = moment(timestamp).fromNow();
   return (
     <Comment>
-      <Comment.Avatar as="a" src="avi/Jordan.png" />
+      <Comment.Avatar as="a" src={avatar} />
       <Comment.Content>
         <Comment.Text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id dolor id nibh ultricies vehicula ut id elit. Duis mollis, est non commodo
+          {postBody}
         </Comment.Text>
-        <Comment.Author as="a">Author McAuthorton</Comment.Author>
+        {
+          privacy === 'public' ?
+            <Icon color="red" name="eye" />
+          :
+            null
+        }
+        <Comment.Author as="a">{username}</Comment.Author>
         <Comment.Metadata>
-          <span>Posted 10 Minutes Ago</span>
+          <span>{ timeSince }</span>
           <Comment.Actions>
             <Icon name="reply" size="large" />
             <Icon name="repeat" size="large" />
@@ -22,6 +30,12 @@ function Post() {
   );
 }
 
-Post.propTypes = {};
+Post.propTypes = {
+  avatar: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+  postBody: PropTypes.string.isRequired,
+  timestamp: PropTypes.string.isRequired,
+  privacy: PropTypes.string.isRequired,
+};
 
 export default Post;

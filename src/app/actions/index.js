@@ -1,9 +1,10 @@
 import axios from 'axios';
 
-export const LOAD_SLIDES = 'LOAD_SLIDES';
-export const CHANGE_SLIDE = 'CHANGE_SLIDE';
+export const LOAD_POSTS = 'LOAD_POSTS';
 export const UPDATE_TEXT = 'UPDATE_TEXT';
 export const NEW_POST = 'NEW_POST';
+export const LOAD_SLIDES = 'LOAD_SLIDES';
+export const CHANGE_SLIDE = 'CHANGE_SLIDE';
 
 function updateText(postBody) {
   return {
@@ -16,6 +17,13 @@ function newPost(post) {
   return {
     type: NEW_POST,
     post,
+  };
+}
+
+function loadPosts(posts) {
+  return {
+    type: LOAD_POSTS,
+    posts,
   };
 }
 
@@ -33,6 +41,14 @@ function changeSlide(index) {
   };
 }
 
+function fetchPosts() {
+  return (dispatch) => {
+    axios.get('/json?filename=posts')
+    .then(res => res.data)
+    .then(posts => dispatch(loadPosts(posts)));
+  };
+}
+
 function fetchSlides() {
   return (dispatch) => {
     axios.get('/json?filename=slideshow')
@@ -42,7 +58,10 @@ function fetchSlides() {
 }
 
 export function loadInitialState() {
-  return dispatch => dispatch(fetchSlides());
+  return (dispatch) => {
+    dispatch(fetchPosts());
+    dispatch(fetchSlides());
+  };
 }
 
 export function handleText(text) {

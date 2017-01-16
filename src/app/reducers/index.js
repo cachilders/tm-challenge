@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import {
+  LOAD_POSTS,
   LOAD_SLIDES,
   CHANGE_SLIDE,
   UPDATE_TEXT,
@@ -15,16 +16,16 @@ const initialState = {
   nextPost: 1,
   activeFilter: 'public',
   slidesLoading: true,
+  postsLoading: true,
   slidesIndex: null,
 };
 
 function notify(state = initialState, action) {
   switch (action.type) {
-    case LOAD_SLIDES:
+    case LOAD_POSTS:
       return Object.assign({}, state, {
-        slides: action.slides,
-        slidesLoading: false,
-        slidesIndex: 0,
+        posts: [...action.posts],
+        postsLoading: false,
       });
     case UPDATE_TEXT:
       return Object.assign({}, state, {
@@ -32,9 +33,15 @@ function notify(state = initialState, action) {
       });
     case NEW_POST:
       return Object.assign({}, state, {
-        posts: [...state.posts, action.post],
+        posts: [action.post, ...state.posts],
         nextPost: state.nextPost + 1,
         postBody: '',
+      });
+    case LOAD_SLIDES:
+      return Object.assign({}, state, {
+        slides: action.slides,
+        slidesLoading: false,
+        slidesIndex: 0,
       });
     case CHANGE_SLIDE:
       return Object.assign({}, state, {

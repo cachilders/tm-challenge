@@ -1,19 +1,27 @@
 import React, { PropTypes } from 'react';
-import { Comment } from 'semantic-ui-react';
+import { Comment, Segment } from 'semantic-ui-react';
 import Post from '../post/Post';
 
-const mock = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-function Timeline({ posts }) {
+function Timeline({ posts, postsLoading }) {
   return (
-    <Comment.Group>
-      { mock.map(key => <Post key={key} />) }
-    </Comment.Group>
+    <div>
+      {
+        postsLoading ?
+          <Segment loading basic padded="very" />
+        :
+          <Segment basic>
+            <Comment.Group>
+              { posts.map(post => <Post key={post.id} {...post} />) }
+            </Comment.Group>
+          </Segment>
+      }
+    </div>
   );
 }
 
 Timeline.propTypes = {
   posts: PropTypes.arrayOf.isRequired,
+  postsLoading: PropTypes.bool.isRequired,
 };
 
 export default Timeline;
