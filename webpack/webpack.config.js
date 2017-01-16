@@ -105,7 +105,6 @@ module.exports = (options) => {
     );
     webpackConfig.entry.vendor = [
       'axios',
-      'immutable',
       'react',
       'react-dom',
       'redux',
